@@ -4,6 +4,8 @@ module.exports = function(api) {
     presets: ['babel-preset-expo'],
     plugins: [
       "tailwindcss-react-native/babel",
+      'transform-inline-environment-variables',
+      'react-native-reanimated/plugin'
     ],
   };
 };
