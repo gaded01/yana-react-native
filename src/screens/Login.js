@@ -46,9 +46,14 @@ const Login = () => {
          storeToken(res.data.access_token);
          navigation.navigate("HomePanel");
          }
+         else{
+            alert('Invalid credentials, Please try again.');
+            setLoading(false);
+         }
       })
       .catch((error) => {
          console.log('error', error);
+         alert('Invalid credentials, Please try again.')
          setLoading(false);
       });
     };

@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const Logout = () => {
    const nav = useNavigation();
+   let config = {};
    
    useEffect(()=>{
       const out = async() => {
@@ -17,7 +18,6 @@ const Logout = () => {
          } 
          axios.post(`${process.env.REACT_APP_BASE_API_URL}/user-logout`, {}, config)
          .then((res)=> {
-            console.log('remove');
             AsyncStorage.removeItem('@access_token');
             nav.replace('Login');
          })

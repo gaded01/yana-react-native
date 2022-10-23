@@ -41,11 +41,22 @@ const Registration = () => {
    };
 
    const submitData = () => {
+      console.log(registerData)
       setLoading(true);
       axios.post(`${process.env.REACT_APP_BASE_API_URL}/register`, registerData)
       .then((res)=>{
-         alert('Registration Success');
-         setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
+         if(res.data.status == 'created'){
+            alert('Registration Success');
+            setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
+            navigation.navigate("Login")
+         }
+         else{
+            alert('Invalid input, please try again');
+         }
+         setLoading(false);
+      })
+      .catch((err)=> {
+         alert('Invalid!');
          setLoading(false);
       })
    };
@@ -119,7 +130,7 @@ const Registration = () => {
                      onChangeText={(data)=>handleChange('email', data)}
                      placeholder="Enter email"
                   />
-                  <Text className="mt-2 text-base">Password (Min.8):</Text>
+                  <Text className="mt-2 text-base">Password:</Text>
                   <TextInput
                      className="px-4 text-base py-3 rounded-md border mb-5"
                      onChangeText={(data)=>handleChange('password', data)}
@@ -150,5 +161,6 @@ const Registration = () => {
       </SafeAreaView>
    );
 }
+
 
 export default Registration;
