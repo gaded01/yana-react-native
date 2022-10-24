@@ -18,7 +18,8 @@ const TestQuestion = () => {
          } 
          await axios.post(`${process.env.REACT_APP_BASE_API_URL}/get-test-question/`+testStatus , params, config)
          .then((res) => {
-            setTestQuestion(res.data)
+            setTestQuestion(res.data);
+            console.log(res.data)
          })
          .catch((error) => {
             return error;

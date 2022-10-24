@@ -27,7 +27,7 @@ const Result = () => {
          }
          await axios.post(`${REACT_APP_BASE_API_URL}/test-result`, {elder_info_id: elder.elder_info.id} , config)
          .then((res) => {
-            setTestResult(()=> res.data)  
+            setTestResult(()=> res.data)
          })
          .catch((error)=> {
             console.log(error)

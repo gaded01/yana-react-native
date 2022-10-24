@@ -28,9 +28,11 @@ const ElderTest = () => {
 	const { elder, setElder } = useElderContext();
 	const [optionSelect, setOptionSelect] = useState("");
 	const [loading, setLoading] = useState(false);
+	let config = {};
 
 	useEffect(() => {
 		setLoading(true);
+		console.log('run'); 
 		const getItemNumber = async () => {
 			let response = await AsyncStorage.getItem("@access_token");
 			config = {
@@ -39,21 +41,17 @@ const ElderTest = () => {
 			await axios
 			.post(`${process.env.REACT_APP_BASE_API_URL}/test-item`, {elder_info_id: elder.elder_info.id },  config)
 			.then((res) => {
-				if (res.data !== 1) {
-					setTestStatus(() => res.data);
-					setOptionSelect(3);
-					setLoading(false);
-				} else {
-					setLoading(false);
-				}
+				setTestStatus(() => res.data);
+				setOptionSelect(''); 
+				setLoading(false);
 			})
 			.catch((error) => {
-				console.log(error);
+				console.log('err', error);
 				setLoading(false);
 			});
 		};
 		getItemNumber();
-	}, [testStatus]);
+	}, [elder]);
 
 	const postAnswer = async () => {
 		setLoading(true);
@@ -79,6 +77,7 @@ const ElderTest = () => {
 					console.log(error);
 				});
 			setLoading(false); 
+			setOptionSelect(''); 
 			}, 3000);
 		}
 		console.log("test", testStatus);
@@ -97,9 +96,10 @@ const ElderTest = () => {
 				setTestStatus((prevStatus) => prevStatus - 1);
 			})
 			.catch((error) => {
-				console.log(error);
+				console.log('err', error);
 			});
 		setLoading(false);
+		setOptionSelect(''); 
 		}, 3000);
 		
   	};

@@ -49,19 +49,24 @@ const ElderInfo = () => {
       config = {
          headers: {Authorization: `Bearer ${response}`}
       }
-      axios.post(`${process.env.REACT_APP_BASE_API_URL}/register-elder`, registerData, config)
-      .then((res)=>{
-         setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
-         if(res.data.status == 'done'){
-            alert(res.data.message);
-            navigation.navigate("Home")
-         }
-         else{
-            setElder(res.data);
-            navigation.navigate("ElderTest")
-         }
-      })
-      setLoading(false);
+      setTimeout(() => {
+         axios.post(`${process.env.REACT_APP_BASE_API_URL}/register-elder`, registerData, config)
+         .then((res)=>{
+            setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
+            if(res.data.status == 'done'){
+               alert(res.data.message);
+               navigation.navigate("Home")
+            }
+            else{
+               setElder(res.data);
+               console.log('res', res.data)
+               navigation.navigate("ElderTest")
+            }
+         })
+         .catch((err)=>console.log('err', err))
+         setLoading(false);
+      } ,3000)
+      
    };
    
    return (

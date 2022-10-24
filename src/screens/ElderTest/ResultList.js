@@ -26,6 +26,7 @@ const ResultList = () => {
 	const [testAnswers, setTestAnswers] = useState([]);
    const [testResult, setTestResult] = useState();
 	const [loading, setLoading] = useState(false);
+   let config = {};
 
 	useEffect(() => {
 		setLoading(true);
@@ -41,7 +42,7 @@ const ResultList = () => {
             console.log('ans', res.data);
          })
 			.catch((error) => {
-				console.log(error);
+				console.log('err', error);
 			});
 		};
 		getItemNumber();

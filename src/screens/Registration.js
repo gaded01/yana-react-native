@@ -133,6 +133,7 @@ const Registration = () => {
                   <Text className="mt-2 text-base">Password:</Text>
                   <TextInput
                      className="px-4 text-base py-3 rounded-md border mb-5"
+                     maxLength={8}
                      onChangeText={(data)=>handleChange('password', data)}
                      placeholder="Enter password"
                   />
