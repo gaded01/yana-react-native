@@ -66,7 +66,6 @@ const ElderInfo = () => {
          .catch((err)=>console.log('err', err))
          setLoading(false);
       } ,3000)
-      
    };
    
    return (

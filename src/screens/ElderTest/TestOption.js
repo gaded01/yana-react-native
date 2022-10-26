@@ -20,14 +20,14 @@ const TestOption = ({setOptionSelect, optionSelect}) => {
          await axios.get(`${process.env.REACT_APP_BASE_API_URL}/get-test-option`, config)
          .then((res)=> {
             setTestOption(() => res.data); 
-         })
+         });
       }
       fetchOption();
    },[]);
 
   
    return (
-      <View className="py-5">
+      <View className="py-5"> 
       {testOption.map((option , i)=>{
           return (
             <RadioButton 

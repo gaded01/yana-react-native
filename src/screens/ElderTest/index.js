@@ -25,6 +25,7 @@ import { useElderContext } from "../../context/ElderContext";
 const ElderTest = () => {
 	const navigation = useNavigation();
 	const { testStatus, setTestStatus } = useTestStatusContext();
+	const [prevAnswer , setPrevAnswer] = useState('');
 	const { elder, setElder } = useElderContext();
 	const [optionSelect, setOptionSelect] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -36,21 +37,23 @@ const ElderTest = () => {
 		const getItemNumber = async () => {
 			let response = await AsyncStorage.getItem("@access_token");
 			config = {
-			headers: { Authorization: `Bearer ${response}` },
+			headers: { Authorization: `Bearer ${response}` }, 
 			};
 			await axios
 			.post(`${process.env.REACT_APP_BASE_API_URL}/test-item`, {elder_info_id: elder.elder_info.id },  config)
 			.then((res) => {
+				setPrevAnswer(res.data - 1);
+				console.log('res,data', res.data)
 				setTestStatus(() => res.data);
-				setOptionSelect(''); 
 				setLoading(false);
 			})
 			.catch((error) => {
 				console.log('err', error);
 				setLoading(false);
-			});
+			}); 
 		};
 		getItemNumber();
+		setOptionSelect('');
 	}, [elder]);
 
 	const postAnswer = async () => {
@@ -63,46 +66,46 @@ const ElderTest = () => {
 			setTimeout(() => {
 				axios.post(`${process.env.REACT_APP_BASE_API_URL}/test-answer`,
 					{
-						elder_info_id: elder.elder_info.id,
+						elder_info_id: elder.elder_info.id, 
 						elderly_test_question_id: testStatus,
 						elderly_test_option_id: optionSelect,
-					},
+						page: testStatus + 1,
+					}, 
 					config
+					
 				)
-				.then(() => {
-					console.log("success");
+				.then((res) => {
+					setPrevAnswer((prevAnswer) => prevAnswer + 1);
 					setTestStatus((prevStatus) => prevStatus + 1);
+					!res.data.data.length? setOptionSelect('') : setOptionSelect(res.data.data[0].elderly_test_option_id);
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 			setLoading(false); 
-			setOptionSelect(''); 
 			}, 3000);
 		}
-		console.log("test", testStatus);
   	};
-
+ 
 	const removeAnswer = async () => {
 		setLoading(true);
 		let response = await AsyncStorage.getItem("@access_token");
 		config = {
 			headers: { Authorization: `Bearer ${response}` },
 		};
-		setTimeout(() => {
-		axios.post(`${process.env.REACT_APP_BASE_API_URL}/remove-answer`,	{elder_info_id: elder.elder_info.id},	config)
-			.then(() => {
-				console.log("success");
+		setTimeout(() => { 
+		axios.post(`${process.env.REACT_APP_BASE_API_URL}/remove-answer`,	{elder_info_id: elder.elder_info.id, page: prevAnswer},	config)
+			.then((res) => {
+				setOptionSelect(res.data.data[0].elderly_test_option_id);
 				setTestStatus((prevStatus) => prevStatus - 1);
-			})
+				setPrevAnswer((prevAnswer) => prevAnswer - 1);
+			}) 
 			.catch((error) => {
 				console.log('err', error);
 			});
-		setLoading(false);
-		setOptionSelect(''); 
+		setLoading(false); 
 		}, 3000);
-		
-  	};
+  	}; 
 
 	return (
 		<SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
@@ -115,7 +118,7 @@ const ElderTest = () => {
 					<Bars3BottomRightIcon color="#000" size="35" onPress={()=>navigation.openDrawer()}/>
 				</View>
 			</View>
-			{testStatus <= 42?
+			{testStatus <= 2?
 				<>
 					<View className="flex bg-yellow-400 py-3 px-5">
 						<Text className="text-lg font-bold">Elder Abuse Test</Text>
@@ -128,7 +131,7 @@ const ElderTest = () => {
 						/>
 						<TestButton postAnswer={postAnswer} removeAnswer={removeAnswer}/>
 					</View>
-				</>
+				</> 
 			:
 				<View className="flex-1 bg-yellow-400 py-3 px-5">
 					<Result/>

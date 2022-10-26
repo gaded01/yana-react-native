@@ -19,7 +19,7 @@ const Result = () => {
    let config = {};
 
    
-   useEffect(()=> { 
+   useEffect(()=> {
       const fetchTestResult = async () => {
          let response = await AsyncStorage.getItem('@access_token');
          config = {
