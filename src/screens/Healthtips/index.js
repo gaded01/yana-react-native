@@ -28,7 +28,7 @@ const Healthtips = () => {
         </View>
       </View>
       <View className="flex bg-yellow-400 py-3 px-5">
-        <Text className="text-lg font-bold">Hometips</Text>
+        <Text className="text-lg font-bold">Health Tips</Text>
       </View>
       <View className="flex items-center px-10 pb-44 mt-5">
         <ScrollView

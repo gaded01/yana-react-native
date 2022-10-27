@@ -31,13 +31,12 @@ const ElderInfo = () => {
    let config = {};
 
    const selectDate = (event, birthdate) => { 
+      setOpen(() => false);
       let selectedDate  = birthdate || date;
       setDate(selectedDate);
-      
       let tDate = new Date(selectedDate);
       let formattedDate =  monthNames[tDate.getMonth()] +" "+tDate.getDate() + ", "+ tDate.getFullYear() ;
       setTempDate(formattedDate);
-      setOpen(false);
    };
 
    const handleChange = (name, data) => {
@@ -121,13 +120,14 @@ const ElderInfo = () => {
                      color="gray"
                      onPress={() => setOpen(true)}
                      />
-                     {open && 
-                        <DatePicker
+                     {open &&  (
+                         <DatePicker
                            value={date} 
                            display="default"
                            mode="date"
                            onChange={selectDate}
                         /> 
+                        )
                      }
                   </View>
                   <Text className="mt-2 text-base">Address:</Text>

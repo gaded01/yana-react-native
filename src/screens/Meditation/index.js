@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Platform,
 } from "react-native";
 import { Bars3BottomRightIcon } from "react-native-heroicons/outline";
 import SafeViewAndroid from "../../components/SafeViewAndroid";
@@ -58,6 +59,12 @@ const Meditation = () => {
               play={playing}
               videoId={"s6rXVM8VIWc"}
               onChangeState={onStateChange}
+              webViewStyle={{opacity: 0.99}}
+              webViewProps={{
+               renderToHardwareTextureAndroid: true,
+               androidLayerType:
+               Platform.OS === 'android' && Platform.Version <= 22 ? 'hardware' : 'none',
+             }}
             />
             <Text className="font-bold">
               Benefits of mindful meditation for older adults—and how to get

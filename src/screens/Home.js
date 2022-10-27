@@ -42,7 +42,7 @@ const Home = () => {
                      source={require("../../assets/healthcare.png")}
                      
                   />
-                  <Text className="text-sm text-stone-500">Healthy Tips</Text>
+                  <Text className="text-sm text-stone-500">Health Tips</Text>
                </TouchableOpacity>
             </View>
             <View className="flex items-center">

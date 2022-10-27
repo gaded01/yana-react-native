@@ -62,13 +62,19 @@ const ElderTest = () => {
 		config = {
 			headers: { Authorization: `Bearer ${response}` },
 		};
+		console.log({
+			elder_info_id: elder.elder_info.id, 
+			elderly_test_question_id: testStatus,
+			elderly_test_option_id: optionSelect, 
+			page: testStatus + 1,
+		})
 		if (testStatus <= 42) {
 			setTimeout(() => {
 				axios.post(`${process.env.REACT_APP_BASE_API_URL}/test-answer`,
 					{
 						elder_info_id: elder.elder_info.id, 
 						elderly_test_question_id: testStatus,
-						elderly_test_option_id: optionSelect,
+						elderly_test_option_id: optionSelect,  
 						page: testStatus + 1,
 					}, 
 					config
@@ -118,7 +124,7 @@ const ElderTest = () => {
 					<Bars3BottomRightIcon color="#000" size="35" onPress={()=>navigation.openDrawer()}/>
 				</View>
 			</View>
-			{testStatus <= 2?
+			{testStatus <= 42?
 				<>
 					<View className="flex bg-yellow-400 py-3 px-5">
 						<Text className="text-lg font-bold">Elder Abuse Test</Text>

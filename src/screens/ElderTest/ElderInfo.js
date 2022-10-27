@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View, SafeAreaView, Text, Image, TouchableOpacity, TextInput, Button, ScrollView} from 'react-native';
@@ -28,15 +28,16 @@ const ElderInfo = () => {
       type: 'test',
    });
    let config = {};
-
+   useEffect(() => {
+     console.log('open', open);
+   }, [open]);
    const selectDate = (event, birthdate) => { 
+      setOpen(() => false);
       let selectedDate  = birthdate || date;
       setDate(selectedDate);
-      
       let tDate = new Date(selectedDate);
       let formattedDate =  monthNames[tDate.getMonth()] +" "+tDate.getDate() + ", "+ tDate.getFullYear() ;
       setTempDate(formattedDate);
-      setOpen(false);
    };
 
    const handleChange = (name, data) => {
@@ -108,26 +109,25 @@ const ElderInfo = () => {
                   <Text className="mt-2 text-base">Birthdate</Text>
                   <View 
                      className="flex-1 flex-row items-center border rounded-md px-3 mb-1"
-                     onPress={() => setOpen(true)}
                   >
                      <TextInput
                         className="px-1 py-3 text-base rounded-md flex-1"
                         value={tempDate}
                         editable={false}
                         placeholder="Click the button to select date"
-                        onPress={() => setOpen(true)}
                      />
                     <CalendarDaysIcon 
                      color="gray"
                      onPress={() => setOpen(true)}
                      />
-                     {open && 
+                     {open && (
                         <DatePicker
                            value={date} 
                            display="default"
                            mode="date"
                            onChange={selectDate}
                         /> 
+                        ) 
                      }
                   </View>
                   <Text className="mt-2 text-base">Address:</Text>

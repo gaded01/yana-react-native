@@ -13,6 +13,7 @@ import SafeViewAndroid from "../../components/SafeViewAndroid";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useNavigation } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
+import {Platform} from 'react-native';
 
 const Healthtips = () => {
   const navigation = useNavigation();
@@ -54,6 +55,12 @@ const Healthtips = () => {
                play={playing}
                videoId={"bO6NNfX_1ns"}
                onChangeState={onStateChange}
+               webViewStyle={{opacity: 0.99}}
+               webViewProps={{
+                renderToHardwareTextureAndroid: true,
+                androidLayerType:
+                Platform.OS === 'android' && Platform.Version <= 22 ? 'hardware' : 'none',
+              }}
             />
             <Text className="text-justify text-stone-600">
               As an older adult, regular physical activity is one of the most
