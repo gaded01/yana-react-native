@@ -33,7 +33,7 @@ const TestOption = ({setOptionSelect, optionSelect}) => {
             <RadioButton 
                key={i}
                color="#0369A1"
-               label={option.option}
+               label={option.score +" - "+option.option}
                value={option.id}
                selected={optionSelect == option.id? true:false}
                onPress={() => setOptionSelect(option.id)}

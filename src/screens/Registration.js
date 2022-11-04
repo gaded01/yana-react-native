@@ -131,6 +131,7 @@ const Registration = () => {
                      placeholder="Enter email"
                   />
                   <Text className="mt-2 text-base">Password:</Text>
+                  <Text className="text-stone-500 text-base">Your password must contain a maximum of 8 characters.</Text>
                   <TextInput
                      className="px-4 text-base py-3 rounded-md border mb-5"
                      maxLength={8}
