@@ -112,6 +112,33 @@ const Home = () => {
                </TouchableOpacity>
             </View>
          </View>
+         <View className="flex-row justify-evenly mb-5">
+            <View className="flex items-center">
+               <TouchableOpacity 
+                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                  onPress={()=> {navigation.navigate("ElderMonitorInfo")}}   
+               >
+                  <Image
+                     style={{width: 80, height: 80}}
+                     source={require("../../assets/ribbon.png")}
+                     
+                  />
+                  <Text className="text-sm text-stone-500">Elder Monitoring</Text>
+               </TouchableOpacity>
+            </View>
+            <View className="flex items-center">
+               <TouchableOpacity 
+                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                  onPress={()=> {navigation.navigate("ElderMonitoringInfo")}}  
+               >
+                  <Image
+                     style={{width: 80, height: 80}}
+                     source={require("../../assets/rating.png")}
+                  />
+                  <Text className="text-sm text-stone-500 ">Rate Elder's Life</Text>
+               </TouchableOpacity>
+            </View>
+         </View>
       </View>
       <Spinner visible={loading} />
     </SafeAreaView>

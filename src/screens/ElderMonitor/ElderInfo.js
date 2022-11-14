@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View, SafeAreaView, Text, Image, TouchableOpacity, TextInput, Button, ScrollView} from 'react-native';
-import {Bars3BottomRightIcon, CalendarDaysIcon} from "react-native-heroicons/outline";
+import {CalendarDaysIcon} from "react-native-heroicons/outline";
+import { Bars3BottomRightIcon } from "react-native-heroicons/outline";
 import { useElderContext } from "../../context/ElderContext";
 import SafeViewAndroid from "../../components/SafeViewAndroid"; 
 import DatePicker from '@react-native-community/datetimepicker';
@@ -25,13 +26,10 @@ const ElderInfo = () => {
       last_name: '',
       birthdate: date,
       address: '',
-      type: 'test',
+      type: 'monitor',
    });
    let config = {};
-   useEffect(() => {
-     console.log('open', open);
-   }, [open]);
-   
+
    const selectDate = (event, birthdate) => { 
       setOpen(() => false);
       let selectedDate  = birthdate || date;
@@ -54,20 +52,11 @@ const ElderInfo = () => {
       setTimeout(() => {
          axios.post(`${process.env.REACT_APP_BASE_API_URL}/register-elder`, registerData, config)
          .then((res)=>{
-            setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
-            if(res.data.status == 'done'){
-               alert(res.data.message);
-               navigation.navigate("Home")
-            }
-            else{
                setElder(res.data);
-               console.log('res', res.data)
-               navigation.navigate("ElderTest")
-            }
+               res.data.monitor === "exists"? navigation.navigate("ElderTodo") : navigation.navigate("ElderMonitor");
          })
-         .catch((err)=>console.log('err', err))
          setLoading(false);
-      } ,3000)
+      }, 3000)
    };
    
    return (
@@ -92,7 +81,7 @@ const ElderInfo = () => {
                   }}
                   showsHorizontalScrollIndicator={false}
                   className="pt-4"
-               > 
+               >
                   <Text className="mt-2 text-base">First Name:</Text>
                   <TextInput
                      className="px-4 py-3 text-base rounded-md border mb-1"
@@ -110,25 +99,27 @@ const ElderInfo = () => {
                   <Text className="mt-2 text-base">Birthdate</Text>
                   <View 
                      className="flex-1 flex-row items-center border rounded-md px-3 mb-1"
+                     onPress={() => setOpen(true)}
                   >
                      <TextInput
                         className="px-1 py-3 text-base rounded-md flex-1"
                         value={tempDate}
                         editable={false}
                         placeholder="Click the button to select date"
+                        onPress={() => setOpen(true)}
                      />
                     <CalendarDaysIcon 
                      color="gray"
                      onPress={() => setOpen(true)}
                      />
-                     {open && (
-                        <DatePicker
+                     {open &&  (
+                         <DatePicker
                            value={date} 
                            display="default"
                            mode="date"
                            onChange={selectDate}
                         /> 
-                        ) 
+                        )
                      }
                   </View>
                   <Text className="mt-2 text-base">Address:</Text>
@@ -143,7 +134,7 @@ const ElderInfo = () => {
                         className="bg-green-700 rounded-3xl w-48 py-3"
                         onPress={submitData}
                      >  
-                        <Text className="text-center text-base text-white">Start Test</Text>
+                        <Text className="text-center text-base text-white">Start Rating</Text>
                      </TouchableOpacity>
                   </View>
                </ScrollView>
@@ -155,6 +146,5 @@ const ElderInfo = () => {
       </SafeAreaView>
    );
 }
-
 
 export default ElderInfo;

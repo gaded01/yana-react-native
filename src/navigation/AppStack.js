@@ -16,6 +16,8 @@ import HomeTips from "../screens/HomeTips";
 import Meditation from "../screens/Meditation";
 import Exercise from "../screens/Exercise";
 import Drawer from "../screens/Drawer";
+import ElderMonitor from "../screens/ElderMonitor";
+import ElderAddTodo from "../screens/ElderMonitor/ElderAddTodo";
 
 
 const Stack = createNativeStackNavigator();
@@ -42,6 +44,11 @@ const AppStack = () => {
                headerShown: false
             }} 
          />
+         {/* <Stack.Screen name="ElderAddTodo" component={ElderAddTodo} 
+            options={{
+               headerShown: false
+            }} 
+         /> */}
           {/* <Stack.Screen name="ElderInfo" component={ElderInfo} 
             options={{
                headerShown: false

@@ -11,6 +11,10 @@ import HealthTips from "./Healthtips";
 import HomeTips from "./HomeTips";
 import Meditation from "./Meditation";
 import Exercise from "./Exercise";
+import ElderMonitorInfo from "./ElderMonitor/ElderInfo";
+import ElderMonitor from "./ElderMonitor";
+import ElderTodo from "./ElderMonitor/ElderTodo";
+import ElderAddTodo from "./ElderMonitor/ElderAddTodo";
 
 
 const Drawer = createDrawerNavigator();
@@ -25,7 +29,7 @@ const Root = () => {
                // drawerItemStyle: { display: 'none' } 
             }}
          />
-             <Drawer.Screen name="ElderInfo" component={ElderInfo} 
+         <Drawer.Screen name="ElderInfo" component={ElderInfo} 
             options={{
                headerShown: false,
                drawerItemStyle: { display: 'none' } 
@@ -74,6 +78,30 @@ const Root = () => {
             }} 
          />
          <Drawer.Screen name="Exercise" component={Exercise} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="ElderMonitorInfo" component={ElderMonitorInfo} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="ElderMonitor" component={ElderMonitor} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="ElderTodo" component={ElderTodo} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="ElderAddTodo" component={ElderAddTodo} 
             options={{
                headerShown: false,
                drawerItemStyle: { display: 'none' } 
