@@ -58,6 +58,9 @@ const Result = () => {
                <Text className="text-center text-lg py-3 ">
                   Elderly is <Text className="font-bold"> {testResult? testResult.test_abuse_level.abuse_level: null} </Text> 
                </Text>
+               <Text className="text-center text-lg py-3 ">
+                  <Text className="font-bold"> Reccomended Activties: </Text> {testResult? testResult.test_abuse_level.advice: null}
+               </Text>
                <View className="pt-3 mb-6">
                   <TouchableOpacity
                      className="bg-white mt-4 rounded-lg h-14"

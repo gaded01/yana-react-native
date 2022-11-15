@@ -15,6 +15,9 @@ import ElderMonitorInfo from "./ElderMonitor/ElderInfo";
 import ElderMonitor from "./ElderMonitor";
 import ElderTodo from "./ElderMonitor/ElderTodo";
 import ElderAddTodo from "./ElderMonitor/ElderAddTodo";
+import ElderTestHistory from "./ElderTestHistory";
+import ElderHistoryInfo from "./ElderTestHistory/ElderInfo";
+import Soundtrack from "./Soundtrack";
 
 
 const Drawer = createDrawerNavigator();
@@ -102,6 +105,24 @@ const Root = () => {
             }} 
          />
          <Drawer.Screen name="ElderAddTodo" component={ElderAddTodo} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="ElderHistoryInfo" component={ElderHistoryInfo} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="ElderTestHistory" component={ElderTestHistory} 
+            options={{
+               headerShown: false,
+               drawerItemStyle: { display: 'none' } 
+            }} 
+         />
+         <Drawer.Screen name="Soundtrack" component={Soundtrack} 
             options={{
                headerShown: false,
                drawerItemStyle: { display: 'none' } 

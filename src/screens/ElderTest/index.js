@@ -143,6 +143,7 @@ const ElderTest = () => {
 					<Result/>
 				</View>
 			}
+			<Text className="absolute bottom-5 px-6 text-stone-400 mb-10"><Text className="font-bold">Note: </Text>The tool is not for diagnosed, for self-assessment only</Text>
 			<Text className="absolute bottom-5 px-6 text-stone-400">Validation of Elderly Abuse Assessment Tool</Text>
 			<Text className="absolute bottom-0 px-6 text-stone-400">Copyright by Joel Rey Ugsang Acob</Text>
 			<Spinner visible={loading} />

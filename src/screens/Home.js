@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Bars3BottomRightIcon } from "react-native-heroicons/outline";
@@ -31,6 +32,16 @@ const Home = () => {
         </View>
       </View>
       <View className="flex-1 bg-yellow-400 py-5">
+         <ScrollView
+            vertical
+            contentContainerStyle={{
+               paddingVertical: 0,
+               flexGrow: 1,
+               paddingBottom: 50,
+            }}
+            showsHorizontalScrollIndicator={false}
+            className="pt-3"
+         >
          <View className="flex-row justify-evenly mb-5">
             <View className="flex items-center">
                <TouchableOpacity 
@@ -58,87 +69,115 @@ const Home = () => {
                </TouchableOpacity>
             </View>
          </View>
-         <View className="flex-row justify-evenly mb-5">
-            <View className="flex items-center">
-               <TouchableOpacity 
-                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
-                  onPress={()=> {navigation.navigate("Meditation")}}   
-               >
-                  <Image
-                     style={{width: 80, height: 80}}
-                     source={require("../../assets/meditation.png")}
-                     
-                  />
-                  <Text className="text-sm text-stone-500">Meditation</Text>
-               </TouchableOpacity>
+       
+            <View className="flex-row justify-evenly mb-5">
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("Meditation")}}   
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/meditation.png")}
+                        
+                     />
+                     <Text className="text-sm text-stone-500">Meditation</Text>
+                  </TouchableOpacity>
+               </View>
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("Exercise")}}  
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/exercise.png")}
+                     />
+                     <Text className="text-sm text-stone-500 ">Exercise</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
-            <View className="flex items-center">
-               <TouchableOpacity 
-                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
-                  onPress={()=> {navigation.navigate("Exercise")}}  
-               >
-                  <Image
-                     style={{width: 80, height: 80}}
-                     source={require("../../assets/exercise.png")}
-                  />
-                  <Text className="text-sm text-stone-500 ">Exercise</Text>
-               </TouchableOpacity>
+            <View className="flex-row justify-evenly mb-5">
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("ElderInfo")}}   
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/ribbon.png")}
+                        
+                     />
+                     <Text className="text-sm text-stone-500">Elder Abuse Test</Text>
+                  </TouchableOpacity>
+               </View>
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("ElderRatingInfo")}}  
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/rating.png")}
+                     />
+                     <Text className="text-sm text-stone-500 ">Rate Elder's Life</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
-         </View>
-         <View className="flex-row justify-evenly mb-5">
-            <View className="flex items-center">
-               <TouchableOpacity 
-                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
-                  onPress={()=> {navigation.navigate("ElderInfo")}}   
-               >
-                  <Image
-                     style={{width: 80, height: 80}}
-                     source={require("../../assets/ribbon.png")}
-                     
-                  />
-                  <Text className="text-sm text-stone-500">Elder Abuse Test</Text>
-               </TouchableOpacity>
+            <View className="flex-row justify-evenly mb-5">
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("ElderMonitorInfo")}}   
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/monitoring.png")}
+                     />
+                     <Text className="text-sm text-stone-500">Elder Monitoring</Text>
+                  </TouchableOpacity>
+               </View>
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("Soundtrack")}}
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/soundtrack.png")}
+                     />
+                     <Text className="text-sm text-stone-500 ">Soundtrack</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
-            <View className="flex items-center">
-               <TouchableOpacity 
-                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
-                  onPress={()=> {navigation.navigate("ElderRatingInfo")}}  
-               >
-                  <Image
-                     style={{width: 80, height: 80}}
-                     source={require("../../assets/rating.png")}
-                  />
-                  <Text className="text-sm text-stone-500 ">Rate Elder's Life</Text>
-               </TouchableOpacity>
+            <View className="flex-row justify-evenly mb-5">
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                     onPress={()=> {navigation.navigate("ElderHistoryInfo")}}
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/history.png")}
+                        
+                     />
+                     <Text className="text-sm text-stone-500">Test History</Text>
+                  </TouchableOpacity>
+               </View>
+               <View className="flex items-center">
+                  <TouchableOpacity 
+                     className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
+                   
+                  >
+                     <Image
+                        style={{width: 80, height: 80}}
+                        source={require("../../assets/soon.png")}
+                     />
+                     <Text className="text-sm text-stone-500 ">Comming Soon</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
-         </View>
-         <View className="flex-row justify-evenly mb-5">
-            <View className="flex items-center">
-               <TouchableOpacity 
-                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
-                  onPress={()=> {navigation.navigate("ElderMonitorInfo")}}   
-               >
-                  <Image
-                     style={{width: 80, height: 80}}
-                     source={require("../../assets/ribbon.png")}
-                     
-                  />
-                  <Text className="text-sm text-stone-500">Elder Monitoring</Text>
-               </TouchableOpacity>
-            </View>
-            <View className="flex items-center">
-               <TouchableOpacity 
-                  className="w-28 h-28 bg-white shadow-md flex items-center justify-center rounded-lg"
-                  onPress={()=> {navigation.navigate("ElderMonitoringInfo")}}  
-               >
-                  <Image
-                     style={{width: 80, height: 80}}
-                     source={require("../../assets/rating.png")}
-                  />
-                  <Text className="text-sm text-stone-500 ">Rate Elder's Life</Text>
-               </TouchableOpacity>
-            </View>
-         </View>
+         </ScrollView>
       </View>
       <Spinner visible={loading} />
     </SafeAreaView>

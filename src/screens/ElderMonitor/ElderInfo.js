@@ -24,7 +24,7 @@ const ElderInfo = () => {
    const [registerData, setRegisterData] = useState({
       first_name: '',
       last_name: '',
-      birthdate: date,
+      birthdate: '',
       address: '',
       type: 'monitor',
    });
@@ -34,6 +34,7 @@ const ElderInfo = () => {
       setOpen(() => false);
       let selectedDate  = birthdate || date;
       setDate(selectedDate);
+      setRegisterData(prevState=> ({...prevState, birthdate: birthdate}));
       let tDate = new Date(selectedDate);
       let formattedDate =  monthNames[tDate.getMonth()] +" "+tDate.getDate() + ", "+ tDate.getFullYear() ;
       setTempDate(formattedDate);
@@ -52,8 +53,14 @@ const ElderInfo = () => {
       setTimeout(() => {
          axios.post(`${process.env.REACT_APP_BASE_API_URL}/register-elder`, registerData, config)
          .then((res)=>{
+            if(res.data.status == "age"){
+               alert(res.data.message)
+            }
+            else {
+               setRegisterData({...registerData, first_name: '',last_name: '', birthdate: date,  address: ''});
                setElder(res.data);
                res.data.monitor === "exists"? navigation.navigate("ElderTodo") : navigation.navigate("ElderMonitor");
+            }   
          })
          setLoading(false);
       }, 3000)

@@ -23,7 +23,7 @@ const ElderInfo = () => {
    const [registerData, setRegisterData] = useState({
       first_name: '',
       last_name: '',
-      birthdate: date,
+      birthdate: '',
       address: '',
       type: 'test',
    });
@@ -36,6 +36,7 @@ const ElderInfo = () => {
       setOpen(() => false);
       let selectedDate  = birthdate || date;
       setDate(selectedDate);
+      setRegisterData(prevState=> ({...prevState, birthdate: birthdate}));
       let tDate = new Date(selectedDate);
       let formattedDate =  monthNames[tDate.getMonth()] +" "+tDate.getDate() + ", "+ tDate.getFullYear() ;
       setTempDate(formattedDate);
@@ -54,15 +55,21 @@ const ElderInfo = () => {
       setTimeout(() => {
          axios.post(`${process.env.REACT_APP_BASE_API_URL}/register-elder`, registerData, config)
          .then((res)=>{
-            setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
-            if(res.data.status == 'done'){
-               alert(res.data.message);
-               navigation.navigate("Home")
-            }
-            else{
-               setElder(res.data);
+            if(res.data.status == "age"){
+               alert(res.data.message)
                console.log('res', res.data)
-               navigation.navigate("ElderTest")
+            }
+            else {
+               setRegisterData({...registerData, first_name: '',last_name: '', birthdate:date,  address:''});
+               if(res.data.status == 'done'){
+                  alert(res.data.message);
+                  navigation.navigate("Home")
+               }
+               else{
+                  setElder(res.data);
+                  console.log('res', res.data)
+                  navigation.navigate("ElderTest")
+               }
             }
          })
          .catch((err)=>console.log('err', err))

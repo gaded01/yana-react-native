@@ -14,7 +14,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-const ElderInfo = () => {
+const ElderHistoryInfo = () => {
    const navigation = useNavigation()
    const { elder, setElder } = useElderContext();
    const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const ElderInfo = () => {
       last_name: '',
       birthdate: '',
       address: '',
-      type: "rate",
+      type: "history",
    });
    let config = {};
 
@@ -53,15 +53,17 @@ const ElderInfo = () => {
       setTimeout(() => {
          axios.post(`${process.env.REACT_APP_BASE_API_URL}/register-elder`, registerData, config)
          .then((res)=>{
-            if(res.data.status == "age"){
-               alert(res.data.message)
-            }
-            else {
-               setRegisterData({...registerData, first_name: '',last_name: '', birthdate: date,  address: ''});
-               setElder(res.data);
-               navigation.navigate("ElderRating");
-            }
-         })
+               if(res.data.status == "age"){
+                  alert(res.data.message)
+                  console.log('res', res.data)
+               }
+               else {
+                  setRegisterData({...registerData, first_name: '',last_name: '', birthdate: date,  address: ''});
+                  setElder(res.data);
+                  console.log('res', res.data)
+                  navigation.navigate("ElderTestHistory");
+               }
+            })
          setLoading(false);
       }, 3000)
    };
@@ -154,4 +156,4 @@ const ElderInfo = () => {
    );
 }
 
-export default ElderInfo;
+export default ElderHistoryInfo;
